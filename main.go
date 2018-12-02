@@ -2,6 +2,7 @@ package main
 
 import (
 	"aoc2018/day1"
+	"aoc2018/day2"
 	"fmt"
 	"io/ioutil"
 	"time"
@@ -9,6 +10,7 @@ import (
 
 func main() {
 	solve(day1.Solver{})
+	solve(day2.Solver{})
 }
 
 func solve(solver solver) {
