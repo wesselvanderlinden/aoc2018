@@ -19,12 +19,12 @@ func solve(solver solver) {
 		panic(err)
 	}
 
-	fmt.Println("# Day ", solver.DayNumber())
+	fmt.Println("------ Day", solver.DayNumber(), "------")
 
-	fmt.Println("-- Part 1")
+	fmt.Println("Part 1")
 	solvePart(solver.SolvePart1, string(input))
 	fmt.Println()
-	fmt.Println("-- Part 2")
+	fmt.Println("Part 2")
 	solvePart(solver.SolvePart2, string(input))
 	fmt.Println()
 }
@@ -33,12 +33,12 @@ func solvePart(f solverFunc, input string) {
 	s := time.Now()
 	answer, err := f(input)
 
-	fmt.Println("Duration:", time.Since(s))
+	fmt.Println("\tDuration:", time.Since(s))
 
 	if err != nil {
-		fmt.Println("Error:", err)
+		fmt.Println("\tError:", err)
 	} else {
-		fmt.Println("Answer:", answer)
+		fmt.Println("\tAnswer:", answer)
 	}
 }
 
