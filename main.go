@@ -1,16 +1,16 @@
 package main
 
 import (
-	"aoc2018/day1"
-	"aoc2018/day2"
+	"aoc2018/day3"
 	"fmt"
 	"io/ioutil"
 	"time"
 )
 
 func main() {
-	solve(day1.Solver{})
-	solve(day2.Solver{})
+	//solve(day1.Solver{})
+	//solve(day2.Solver{})
+	solve(day3.Solver{})
 }
 
 func solve(solver solver) {
