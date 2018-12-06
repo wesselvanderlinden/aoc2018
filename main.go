@@ -8,18 +8,35 @@ import (
 	"aoc2018/day5"
 	"fmt"
 	"io/ioutil"
+	"os"
+	"text/tabwriter"
 	"time"
 )
 
 func main() {
-	solve(day1.Solver{})
-	solve(day2.Solver{})
-	solve(day3.Solver{})
-	solve(day4.Solver{})
-	solve(day5.Solver{})
+	solveAll([]solver{
+		day1.Solver{},
+		day2.Solver{},
+		day3.Solver{},
+		day4.Solver{},
+		day5.Solver{},
+	})
 }
 
-func solve(solver solver) {
+func solveAll(solvers []solver) {
+	w := tabwriter.NewWriter(os.Stdout, 0, 0, 3, ' ', 0)
+
+	fmt.Fprintln(w, "Day\tPart\tDuration\tAnswer")
+	fmt.Fprintln(w, "---\t----\t--------\t------")
+
+	for _, s := range solvers {
+		solve(s, w)
+	}
+
+	w.Flush()
+}
+
+func solve(solver solver, w *tabwriter.Writer) {
 	inputFile := fmt.Sprint("input/day", solver.DayNumber(), ".txt")
 	input, err := ioutil.ReadFile(inputFile)
 
@@ -27,27 +44,26 @@ func solve(solver solver) {
 		panic(err)
 	}
 
-	fmt.Println("------ Day", solver.DayNumber(), "------")
-
-	fmt.Println("Part 1")
-	solvePart(solver.SolvePart1, string(input))
-	fmt.Println()
-	fmt.Println("Part 2")
-	solvePart(solver.SolvePart2, string(input))
-	fmt.Println()
+	fmt.Fprint(w, solver.DayNumber())
+	fmt.Fprint(w, "\t", 1)
+	solvePart(solver.SolvePart1, string(input), w)
+	fmt.Fprint(w, "\t", 2)
+	solvePart(solver.SolvePart2, string(input), w)
 }
 
-func solvePart(f solverFunc, input string) {
+func solvePart(f solverFunc, input string, w *tabwriter.Writer) {
 	s := time.Now()
 	answer, err := f(input)
 
-	fmt.Println("\tDuration:", time.Since(s))
+	fmt.Fprint(w, "\t", time.Since(s))
 
 	if err != nil {
-		fmt.Println("\tError:", err)
+		fmt.Fprint(w, "\t\033[31m", err, "\033[0m")
 	} else {
-		fmt.Println("\tAnswer:", answer)
+		fmt.Fprint(w, "\t", answer)
 	}
+
+	fmt.Fprintln(w)
 }
 
 type solver interface {
