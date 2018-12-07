@@ -7,6 +7,7 @@ import (
 	"aoc2018/day4"
 	"aoc2018/day5"
 	"aoc2018/day6"
+	"aoc2018/day7"
 	"fmt"
 	"io/ioutil"
 	"os"
@@ -22,6 +23,7 @@ func main() {
 		day4.Solver{},
 		day5.Solver{},
 		day6.Solver{},
+		day7.Solver{},
 	})
 }
 
